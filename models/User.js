@@ -8,7 +8,7 @@ const userSchema = new Schema({
   timesheets: [{
     type: Schema.Types.ObjectId, ref: 'Timesheet'
   }],
-  position: {type: Number, default: 1, required: true},
+  position: {type: Number, default: 1, enum: [1,2,3], required: true},
   addedDate: { type: Date, default: Date.now }
 });
 
