@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const timesheetSchema = new Schema({
   punchIn: {type: Schema.Types.ObjectId, ref: 'Punch'},    
   punchOut: {type: Schema.Types.ObjectId, ref: 'Punch'},
-  employeeNum: { type: Schema.Types.ObjectId, ref: 'User' },
+  milesTraveled: { type: Schema.Types.ObjectId, ref: 'Miles'},
+  employeeNum: { type: Schema.Types.ObjectId, ref: 'User'},
   addedDate: { type: Date, default: Date.now }
 });
 
