@@ -2,9 +2,12 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy
 require('dotenv').config();
 const PORT = process.env.PORT || 3001;
 const app = express();
+
 
 // Define middleware here
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -15,6 +18,9 @@ if (process.env.NODE_ENV === "production") {
 }
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
+
+const User = require('./models/User')
+passport.use(new LocalStrategy(User.authenticate()))
 
 
 // Define API routes here
