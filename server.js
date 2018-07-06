@@ -3,7 +3,8 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy
+const LocalStrategy = require('passport-local').Strategy;
+const apiRoutes = require('./routes')
 require('dotenv').config();
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -24,7 +25,7 @@ passport.use(new LocalStrategy(User.authenticate()))
 
 
 // Define API routes here
-
+app.use(apiRoutes)
 // Send every other request to the React app
 // Define any API routes before this runs
 app.get("*", (req, res) => {

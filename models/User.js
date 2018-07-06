@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 const passport = require('passport');
+require('dotenv').config();
 
 const passportLocalMongoose = require('passport-local-mongoose')
 const autoIncrement = require('mongoose-auto-increment')
 const Schema = mongoose.Schema;
-
 const connection = mongoose.createConnection(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
 autoIncrement.initialize(connection)
 

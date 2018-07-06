@@ -4,7 +4,7 @@ const Timesheet = require('../models/Timesheet')
 module.exports = {
     findAll: function(req, res) {
       User
-        .find(req.query)
+        .find()
         .sort({ date: -1 })
         .then(UserModel => res.json(UserModel))
         .catch(err => res.status(422).json(err));
@@ -33,12 +33,6 @@ module.exports = {
         .then(UserModel => UserModel.remove())
         .then(UserModel => res.json(UserModel))
         .catch(err => res.status(422).json(err));
-    },
-    addTimesheet: function(req,res){
-        User.findById({_id: req.params.body} )
-            .then(user=>{
-                Timesheet.create({employeeNum: user._id})
-            })
     }
   };
   
