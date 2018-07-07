@@ -1,12 +1,14 @@
 import React from 'react'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap'
+import user from '../util/user'
 
 export default class Registration extends React.Component {
 
     state = {
         firstName: "",
         lastName: "",
-        position: ""
+        position: 0,
+        password: ""
     }
 
 
@@ -24,6 +26,10 @@ export default class Registration extends React.Component {
 
       handleFormSubmit = event => {
         event.preventDefault();
+        user.createUser(this.state)
+          .then(data=>{
+            console.log(data)
+          })
         this.setState({ firstName: "", lastName: "",position: ""});
       };
     
@@ -56,6 +62,18 @@ export default class Registration extends React.Component {
             onChange={this.handleInputChange} />
         </FormGroup>
         <FormGroup>
+          <Label for='password'>
+            Last Name
+          </Label>
+          <Input
+            type='text'
+            ref={this.state.password}
+            name='password'
+            id='password'
+            placeholder="Please enter employee's initial password"
+            onChange={this.handleInputChange} />
+        </FormGroup>
+        <FormGroup>
           <Label for='positionSelect'>
             Select Position
           </Label>
@@ -73,7 +91,7 @@ export default class Registration extends React.Component {
           </option>
           </Input>
         </FormGroup>
-        <Button type="submit">
+        <Button type="submit" onClick={this.handleFormSubmit}>
           Submit
         </Button>
       </Form>

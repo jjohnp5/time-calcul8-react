@@ -1,5 +1,6 @@
 const Punch = require('../models/Punch')
 const Timesheet = require('../models/Timesheet')
+const {User} = require('../models/User');
 
 module.exports = {
     create: function(req, res) {

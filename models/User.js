@@ -9,9 +9,10 @@ const connection = mongoose.createConnection(process.env.MONGODB_URI || "mongodb
 autoIncrement.initialize(connection)
 
 const userSchema = new Schema({
-  employeeNum: {type: Number, required: true},
+  employeeNum: {type: Number},
   firstName: { type: String, required: true },
   lastName: {type: String, required: true},
+  password: {type: String, required: true},
   timesheets: [{
     type: Schema.Types.ObjectId, ref: 'Timesheet'
   }],
@@ -19,9 +20,9 @@ const userSchema = new Schema({
   addedDate: { type: Date, default: Date.now }
 });
 
-userSchema.plugin(autoIncrement.plugin, {model: 'User', field: 'empNum', startAt: 10000, incrementBy: 1})
+userSchema.plugin(autoIncrement.plugin, {model: 'User', field: 'employeeNum', startAt: 10000})
 userSchema.plugin(passportLocalMongoose);
 
 const User = mongoose.model("User", userSchema);
 
-module.exports = User;
+module.exports = {User, connection};

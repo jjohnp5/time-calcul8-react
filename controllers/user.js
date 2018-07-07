@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const {User} = require('../models/User');
 const Timesheet = require('../models/Timesheet')
 
 module.exports = {

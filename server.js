@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === "production") {
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
 
-const User = require('./models/User')
+const {User} = require('./models/User')
 passport.use(new LocalStrategy(User.authenticate()))
 
 
