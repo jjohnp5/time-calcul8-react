@@ -21,7 +21,6 @@ export default class Registration extends React.Component {
           [name]: value
         });
 
-        console.log(this)
       };
 
       handleFormSubmit = event => {
