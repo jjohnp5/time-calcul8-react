@@ -5,11 +5,25 @@ module.exports = {
     create: function(req, res) {
         Punch.create(req.body.punch)
             .then(punch=>{
-                Timesheet
-                    .findOneAndUpdate({_id: req.body.timesheetid}, {punch: punch._id})
-                    .then(timesheet=>res.json(timesheet))
+                User.find({employeeNum: req.body.id})
+                .then(user=>{
+                    Timesheet
+                    .find({employeeNum: user.employeeNum}, {sort: {addedDate: -1} })
+                    .then(timesheet=>{
+                        if(timesheet[0].punch.length < 2){
+                            Timesheet.findOneAndUpdate({_id: timesheet[0]._id}, {punch: punch._id})
+                        }else{
+                            Timesheet.create({employeeNum: user._id})
+                                .then(timesheet=>{
+                                    timesheet.update({punch: punch._id})
+                                })
+                        }
+                    })
                     .catch(err=>res.status(422).json(err))
-            })
+                })
+                
+            }).then(punch=>res.json(punch))
+            .catch(err=>res.status(422).json(err))
     },
     update: function(req, res) {
       Punch

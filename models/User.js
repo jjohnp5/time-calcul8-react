@@ -9,6 +9,7 @@ const connection = mongoose.createConnection(process.env.MONGODB_URI || "mongodb
 autoIncrement.initialize(connection)
 
 const userSchema = new Schema({
+  employeeNum: {type: Number, required: true},
   firstName: { type: String, required: true },
   lastName: {type: String, required: true},
   timesheets: [{
