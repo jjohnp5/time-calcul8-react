@@ -27,6 +27,8 @@
     "mongoose-auto-increment": "^5.0.1",
     "passport": "^0.4.0",
     "passport-local-mongoose": "^5.0.1",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
     "reactstrap": "^6.2.0"
   }
 }

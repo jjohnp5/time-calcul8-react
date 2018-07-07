@@ -3,29 +3,30 @@ import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap'
 
 export default class Registration extends React.Component {
 
-firstNameRef = React.createRef();
-lastNameRef = React.createRef();
-positionRef = React.createRef();
-
-registerEmployee = event => {
-event.preventDefault()
-
-//use this to send back to db
-// const employeeInfo = {
-
-//     firstName: this.firstNameRef.value.value,
-//     lastName: this.lastNameRef.value.value,
-//     position: this.positionRef.value.value
-// }
-
-console.log(this)
-
-//update state...???
+    state = {
+        firstName: "",
+        lastName: "",
+        position: ""
+    }
 
 
-//reset form 
-event.currentTarget.reset();
-}
+    handleInputChange = event => {
+        // Pull the name and value properties off of the event.target (the element which triggered the event)
+        const { name, value } = event.target;
+    
+        // Set the state for the appropriate input field
+        this.setState({
+          [name]: value
+        });
+
+        console.log(this)
+      };
+
+      handleFormSubmit = event => {
+        event.preventDefault();
+        this.setState({ firstName: "", lastName: "",position: ""});
+      };
+    
 
   render () {
     return (
@@ -36,10 +37,11 @@ event.currentTarget.reset();
           </Label>
           <Input
             type='text'
-            ref={this.firstNameRef}
             name='firstName'
+            value={this.state.firstName}
             id='firstName'
-            placeholder="Please enter employee's first name" />
+            placeholder="Please enter employee's first name" 
+            onChange={this.handleInputChange}/>
         </FormGroup>
         <FormGroup>
           <Label for='lastName'>
@@ -47,16 +49,19 @@ event.currentTarget.reset();
           </Label>
           <Input
             type='text'
-            ref={this.lastNameRef}
+            ref={this.state.lastName}
             name='lastName'
             id='lastName'
-            placeholder="Please enter employee's last name" />
+            placeholder="Please enter employee's last name"
+            onChange={this.handleInputChange} />
         </FormGroup>
         <FormGroup>
           <Label for='positionSelect'>
             Select Position
           </Label>
-          <Input type='select' ref={this.positionRef} name='select' id='positionSelect'>
+          <Input type='select' value={this.state.position} name='position' id='positionSelect' onChange={this.handleInputChange}>
+          <option value="" selected disabled hidden>Choose here</option>
+
           <option value="1">
             1
           </option>
