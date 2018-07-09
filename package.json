@@ -19,7 +19,11 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
+<<<<<<< HEAD
     "bcrypt": "^3.0.0",
+=======
+    "axios": "^0.18.0",
+>>>>>>> 4e7ada574a4097cbd373bf991b6d6ca1b02c5c10
     "body-parser": "^1.18.2",
     "dotenv": "^6.0.0",
     "express": "^4.15.4",
