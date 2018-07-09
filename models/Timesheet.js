@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const timesheetSchema = new Schema({
   punch: [{type: Schema.Types.ObjectId, ref: 'Punch'}],
-  milesTraveled: { type: Schema.Types.ObjectId, ref: 'Miles'},
+  milesTraveled: { type: Number, default: 0},
   employeeNum: { type: Schema.Types.ObjectId, ref: 'User'},
   addedDate: { type: Date, default: Date.now }
 });

@@ -3,12 +3,13 @@ const path = require('path');
 const userRoutes = require('./user')
 const timesheetRoutes = require('./timesheet')
 const punchRoutes = require('./punch')
-const milesRoutes = require('./miles')
+const passport = require('passport');
+
 
 router.use("/api/user", userRoutes)
 router.use('/api/timesheet', timesheetRoutes)
 router.use('/api/punch', punchRoutes)
-router.use('/api/miles', milesRoutes)
+// router.use('/login', loginRoute)
 
 router.use(function(req, res) {
     res.sendFile(path.join(__dirname, "../client/build/index.html"));

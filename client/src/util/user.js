@@ -2,7 +2,10 @@ import axios from 'axios';
 
 export default  {
     createUser: function(data){
-        return axios.post('/api/user', data)
+        return axios.post('/api/user', data, {headers: {
+            'Content-Type': 'application/json',
+        }
+    })
     },
     editUser: function(userId, data){
         return axios.put('/api/user/'+userId, data)

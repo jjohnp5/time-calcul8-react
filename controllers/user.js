@@ -1,5 +1,6 @@
 const {User} = require('../models/User');
 const Timesheet = require('../models/Timesheet')
+const bcrypt = require('bcrypt')
 
 module.exports = {
     findAll: function(req, res) {
@@ -16,10 +17,12 @@ module.exports = {
         .catch(err => res.status(422).json(err));
     },
     create: function(req, res) {
+      bcrypt.hash(req.body.password, 10, (err, hash) => {
       User
-        .create(req.body)
+        .create({...req.body, password: hash})
         .then(UserModel => res.json(UserModel))
         .catch(err => res.status(422).json(err));
+      })
     },
     update: function(req, res) {
       User

@@ -12,7 +12,7 @@ module.exports = {
                     .find({employeeNum: user.employeeNum}, {sort: {addedDate: -1} })
                     .then(timesheet=>{
                         if(timesheet[0].punch.length < 2){
-                            Timesheet.findOneAndUpdate({_id: timesheet[0]._id}, {punch: punch._id})
+                            Timesheet.findOneAndUpdate({_id: timesheet[0]._id}, {$push:{punch: punch._id}})
                         }else{
                             Timesheet.create({employeeNum: user._id})
                                 .then(timesheet=>{

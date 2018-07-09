@@ -1,14 +1,19 @@
 const express = require("express");
+const app = express();
 const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const apiRoutes = require('./routes')
+const bcrypt = require('bcrypt')
+const passportJWT = require('passport-jwt');
+const jwt = require('jsonwebtoken')
+
 require('dotenv').config();
 const PORT = process.env.PORT || 3001;
-const app = express();
 
+app.use(passport.initialize());
 
 // Define middleware here
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,12 +24,48 @@ if (process.env.NODE_ENV === "production") {
 }
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
-
 const {User} = require('./models/User')
-passport.use(new LocalStrategy(User.authenticate()))
+passport.use('employee', new LocalStrategy((username, password, done) => {
+  console.log(username)
+  User.find({
+      employeeNum: username
+  }).then(data => {
+    console.log(data);
+      const pw = data[0].password;
+      bcrypt.compare(password, pw, (err, response) => {
+          if (err) {
+              return done(null, false, { message: 'Incorrect username or password' });
+          }
+          return done(null, data[0]);
+      })
+  })
+}))
+
 
 
 // Define API routes here
+app.post('/login', (req,res)=>{
+  passport.authenticate('employee', {session: false}, (err, user, info)=>{
+    if (err || !user) {
+      return res.status(400).json({
+          message: 'Unable to process request',
+          user   : user
+      });
+  }
+  req.login(user, {session: false}, (err) => {
+     if (err) {
+         res.send(err);
+     }
+     console.log(user)
+     // generate a signed son web token with the contents of user object and return it in the response
+     const token = jwt.sign({id:user._id, position: user.position}, 'timeismoney');
+     return res.json({token});
+  });
+
+  })(req,res)
+  
+})
+
 app.use(apiRoutes)
 // Send every other request to the React app
 // Define any API routes before this runs

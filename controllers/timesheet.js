@@ -11,7 +11,7 @@ module.exports = {
     create: function(req, res) {
       Timesheet.create(req.body.timesheet)
         .then(sheet=>{
-            User.findOneAndUpdate({_id: req.params.userid}, {timesheet: sheet._id})
+            User.findOneAndUpdate({_id: req.params.userid}, {$push: {timesheet: sheet._id}})
                 .then(user=>res.json(user))
                 .catch(err=>res.status(422).json(err))
         }).catch(err=>res.status(422).json(err))

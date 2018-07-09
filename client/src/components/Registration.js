@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap'
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 import user from '../util/user'
 
 export default class Registration extends React.Component {
@@ -7,7 +7,7 @@ export default class Registration extends React.Component {
     state = {
         firstName: "",
         lastName: "",
-        position: 0,
+        position: 1,
         password: ""
     }
 
@@ -21,7 +21,6 @@ export default class Registration extends React.Component {
           [name]: value
         });
 
-        console.log(this)
       };
 
       handleFormSubmit = event => {
@@ -36,7 +35,7 @@ export default class Registration extends React.Component {
 
   render () {
     return (
-      <Form className="register-employee" onSubmit={this.registerEmployee}>
+      <Form className="register-employee" >
         <FormGroup>
           <Label for='firstName'>
             First Name
@@ -55,19 +54,19 @@ export default class Registration extends React.Component {
           </Label>
           <Input
             type='text'
-            ref={this.state.lastName}
             name='lastName'
+            value={this.state.lastName}
             id='lastName'
             placeholder="Please enter employee's last name"
             onChange={this.handleInputChange} />
         </FormGroup>
         <FormGroup>
           <Label for='password'>
-            Last Name
+            Password
           </Label>
           <Input
-            type='text'
-            ref={this.state.password}
+            type='password'
+            value={this.state.password}
             name='password'
             id='password'
             placeholder="Please enter employee's initial password"

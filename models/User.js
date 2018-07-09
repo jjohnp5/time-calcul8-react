@@ -2,14 +2,12 @@ const mongoose = require("mongoose");
 const passport = require('passport');
 require('dotenv').config();
 
-const passportLocalMongoose = require('passport-local-mongoose')
 const autoIncrement = require('mongoose-auto-increment')
 const Schema = mongoose.Schema;
 const connection = mongoose.createConnection(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
 autoIncrement.initialize(connection)
 
 const userSchema = new Schema({
-  employeeNum: {type: Number},
   firstName: { type: String, required: true },
   lastName: {type: String, required: true},
   password: {type: String, required: true},
@@ -21,7 +19,7 @@ const userSchema = new Schema({
 });
 
 userSchema.plugin(autoIncrement.plugin, {model: 'User', field: 'employeeNum', startAt: 10000})
-userSchema.plugin(passportLocalMongoose);
+
 
 const User = mongoose.model("User", userSchema);
 
