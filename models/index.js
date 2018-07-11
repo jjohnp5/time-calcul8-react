@@ -1,6 +1,6 @@
 module.exports = {
     Book: require("./User"),
-    Timesheet: require('./Timesheet'),
+    Timesheet: require('./Timesheets'),
     Punch: require('./Punch')
   };
   

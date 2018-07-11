@@ -1,5 +1,5 @@
 const {User} = require('../models/User');
-const Timesheet = require('../models/Timesheet')
+const Timesheet = require('../models/Timesheets')
 
 module.exports = {
     findAll: function(req, res) {
