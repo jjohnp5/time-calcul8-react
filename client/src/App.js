@@ -3,12 +3,16 @@ import "./App.css";
 import Registration from "./components/Registration"
 import Login from './components/Login'
 import Timepunch from "./components/Timepunch";
+import {connect} from 'react-redux'
 
 class App extends Component {
   render() {
+    console.log(this.props)
     return (
       <React.Fragment>
-      <Login />
+        {!this.props.authUser ? 
+      <Login /> :
+      <Registration />}
       </React.Fragment>
     
      
@@ -16,4 +20,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(store=>({authUser: store.authUser}))(App)

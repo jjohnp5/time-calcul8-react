@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
-import login from '../util/login'
+import {connect} from 'react-redux'
+import { handleAddUser } from '../actions/authUser';
 
 class Login extends React.Component {
     state = {
@@ -20,10 +21,7 @@ class Login extends React.Component {
       handleFormSubmit = event => {
         event.preventDefault();
         const {username, password} = this.state
-        login.login(username, password)
-          .then(data=>{
-            console.log(data);
-          })
+        this.props.dispatch(handleAddUser(username, password, ()=>console.log('Store updated')))
       };
     
 
@@ -64,4 +62,4 @@ class Login extends React.Component {
 }
 
 
-export default Login
+export default connect(store=>({store: store.authUser}))(Login)

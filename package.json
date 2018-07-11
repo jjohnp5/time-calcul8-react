@@ -19,11 +19,8 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "bcrypt": "^3.0.0",
-=======
     "axios": "^0.18.0",
->>>>>>> 4e7ada574a4097cbd373bf991b6d6ca1b02c5c10
+    "bcrypt": "^3.0.0",
     "body-parser": "^1.18.2",
     "dotenv": "^6.0.0",
     "express": "^4.15.4",
@@ -36,6 +33,9 @@
     "passport-local-mongoose": "^5.0.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "reactstrap": "^6.2.0"
+    "react-redux": "^5.0.7",
+    "reactstrap": "^6.2.0",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0"
   }
 }

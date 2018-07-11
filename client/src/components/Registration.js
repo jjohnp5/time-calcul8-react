@@ -1,8 +1,9 @@
 import React from 'react'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 import user from '../util/user'
+import {connect} from 'react-redux'
 
-export default class Registration extends React.Component {
+class Registration extends React.Component {
 
     state = {
         firstName: "",
@@ -34,6 +35,7 @@ export default class Registration extends React.Component {
     
 
   render () {
+    console.log(this.props);
     return (
       <Form className="register-employee" >
         <FormGroup>
@@ -97,3 +99,7 @@ export default class Registration extends React.Component {
     )
   }
 }
+
+export default connect(state=>({
+  state: state
+}))(Registration)
