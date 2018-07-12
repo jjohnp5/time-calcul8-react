@@ -7,13 +7,13 @@ import {
 } from '../actions/authUser'
 
 
-export default function user(state = [], action){
+export default function user(state = {}, action){
     switch(action.type){
         case AUTH_USER:
             
-            return {...state, authUser: action.user}
+            return {...action.user}
         case LOGOUT_USER:
-            return {...state, authUser: ''}
+            return {...state, authUser: null}
         // case RECEIVE_DATA:
         //     return action.todos
         default:        

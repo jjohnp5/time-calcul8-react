@@ -12,5 +12,8 @@ export default  {
     },
     removeUser: function(userId){
         return axios.delete('/api/user/'+userId)
+    },
+    getUsers: function(userId){
+        return axios.get('/api/timesheet/'+userId)
     }
 }

@@ -23,4 +23,4 @@ TimeInput.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-export default Input;
+export default TimeInput;

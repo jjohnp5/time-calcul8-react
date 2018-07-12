@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Day from './Day';
+import Day from './TimeDay';
 
-import { notWeekend, weekdays } from '../../utils/moment';
+import { notWeekend, weekdays } from '../../util/moment';
 
 const Timetable = (props) => {
   const { showWeekend, timesheet, errors, onChange, calculateHours, total } = props;

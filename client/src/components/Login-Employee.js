@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
+import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap'
 import {connect} from 'react-redux'
 import { handleAddUser } from '../actions/authUser';
 
@@ -20,13 +20,17 @@ class Login extends React.Component {
     }
       handleFormSubmit = event => {
         event.preventDefault();
+        
         const {username, password} = this.state
-        this.props.dispatch(handleAddUser(username, password, ()=>console.log('Store updated')))
+        this.props.dispatch(handleAddUser(username, password, this.props.history))
+        
       };
     
 
   render () {
     return (
+      <Container>
+        <h1>Login as Employee</h1>
       <Form className="register-employee" >
         <FormGroup>
           <Label for='username'>
@@ -53,10 +57,11 @@ class Login extends React.Component {
              />
         </FormGroup>
         
-        <Button type="submit" onClick={this.handleFormSubmit}>
+        <Button type="submit" color="success" onClick={this.handleFormSubmit}>
           Submit
         </Button>
       </Form>
+      </Container>
     )
   }
 }

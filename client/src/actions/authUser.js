@@ -1,5 +1,7 @@
-import auth from '../util/login'
-
+import user from '../util/login'
+import axios from 'axios';
+import jwt_decode from 'jwt-decode'
+import {handleMapUserTimesheets} from './mapUserData'
 export const AUTH_USER = 'AUTH_USER'
 export const LOGOUT_USER = 'LOGOUT_USER'
 
@@ -19,7 +21,7 @@ export const LOGOUT_USER = 'LOGOUT_USER'
 export function handleLogoutUser(i){
     return (dispatch)=>{
         dispatch(removeUser(i))
-        return auth.logout()
+        return user.logout()
             .catch(()=>{
                 dispatch(addUser(i))
                 alert('an error occured');
@@ -27,15 +29,21 @@ export function handleLogoutUser(i){
     }
     
 }
-export function handleAddUser(username, password, e){
+export function handleAddUser(username, password, history){
     return (dispatch) => {
-        return auth.login(username, password)
+        return user.login(username, password)
             .then((token)=>{
-                dispatch(addUser(token.data.token))
-                e()
+
+                axios.defaults.headers.common.Authorization = `Bearer ${token.data.token}`;
+                const decoded = jwt_decode(token.data.token)
+                console.log(decoded)
+                dispatch(addUser(decoded))
+                dispatch(handleMapUserTimesheets(decoded.employeeNum))
+                history.push('/timesheet')
             }).catch(()=>{
-                e()
+
                 alert('Error adding user.')
+                history.push('/')
             })
     }
 }

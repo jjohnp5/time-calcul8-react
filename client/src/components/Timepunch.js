@@ -1,11 +1,18 @@
 import React from "react";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import punch from "../util/punch";
+import {connect} from 'react-redux';
+import axios from 'axios';
 
-export default class Timepunch extends React.Component {
+class Timepunch extends React.Component {
+  componentDidMount(){
+    console.log(this.props);
+    
+  }
+  
   state = {
     employeeId: "",
-    punch: "In",
+    punchType: "In",
     in: false
   };
 
@@ -19,14 +26,13 @@ export default class Timepunch extends React.Component {
   handleFormSubmit = event => {
     event.preventDefault();
     this.state.in
-      ? this.setState({ employeeId: this.state.id,punch: "In", in: false})
-      : this.setState({ employeeId: this.state.id,punch: "Out", in: true });
+      ? this.setState({ employeeId: this.state.employeeId,punchType: "In", in: false})
+      : this.setState({ employeeId: this.state.employeeId,punchType: "Out", in: true });
 
     punch
-      .createPunch({
-        employeeId: this.state.employeeId,
-        punch: this.state.punch
-      })
+      .createPunch(this.state.employeeId,
+        {punchType: this.state.punchType}
+      )
       .then(data => {
         console.log(data);
       });
@@ -60,3 +66,5 @@ export default class Timepunch extends React.Component {
     );
   }
 }
+
+export default connect(store=>({authUser: store.authUser}))(Timepunch)

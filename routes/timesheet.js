@@ -8,8 +8,8 @@ passport.use('mgr', mgrJwtStrategy);
 passport.use(jwtStrategy);
 
 // Matches with "/api/timesheet"
-router.route("/")
-  .get(passport.authenticate('mgr', { session: false }), timesheetController.findAll)
+router.route("/:id")
+  .get(protected, timesheetController.findById)
   .post(protected, timesheetController.create);
 
 // Matches with "/api/timesheet/:id"
@@ -17,5 +17,9 @@ router
   .route("/:id")
   .put(passport.authenticate('mgr', { session: false }), timesheetController.update)
   .delete(passport.authenticate('mgr', { session: false }), timesheetController.remove);
+
+router
+  .route('/manager/employee/:id')
+  .get(passport.authenticate('mgr', { session: false }), timesheetController.findAll)
 
 module.exports = router;

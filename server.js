@@ -24,13 +24,13 @@ if (process.env.NODE_ENV === "production") {
 }
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
+mongoose.Promise = global.Promise;
 const {User} = require('./models/User')
 passport.use('employee', new LocalStrategy((username, password, done) => {
   console.log(username)
   User.find({
       employeeNum: username
   }).then(data => {
-    console.log(data);
       const pw = data[0].password;
       bcrypt.compare(password, pw, (err, response) => {
           if (err) {
@@ -58,7 +58,7 @@ app.post('/login', (req,res)=>{
      }
      console.log(user)
      // generate a signed son web token with the contents of user object and return it in the response
-     const token = jwt.sign({id:user._id, position: user.position}, 'timeismoney');
+     const token = jwt.sign({id:user._id, position: user.position, employeeNum: user.employeeNum}, 'timeismoney');
      return res.json({token});
   });
 
