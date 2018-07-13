@@ -7,6 +7,9 @@ export default  {
         }
     })
     },
+    loadUsers: function(data){
+        return axios.get('/api/user',data)
+    },
     editUser: function(userId, data){
         return axios.put('/api/user/'+userId, data)
     },

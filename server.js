@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactproj");
 const {User} = require('./models/User')
 passport.use('employee', new LocalStrategy((username, password, done) => {
   console.log(username)
