@@ -1,12 +1,47 @@
 const {User} = require('../models/User');
-const Timesheet = require('../models/Timesheets')
+const Timesheet = require('../models/Timesheet')
+const {ExtractJwt} = require('passport-jwt');
+const jwt = require('jsonwebtoken')
+
 
 module.exports = {
     findAll: function(req, res) {
       User
-        .find()
-        .then(UserModel => res.json(UserModel))
+        .findOne({employeeNum: req.params.id}).populate(
+          {
+            path: 'timesheets',
+            populate: {
+              path: 'punch'
+            }
+
+        })        
+        .then(user=>{
+          res.json(user.timesheets)
+        })
+        
         .catch(err => res.status(422).json(err));
+    },
+    findById: function(req,res){
+      const currentUser = jwt.verify(req.headers.authorization.split(' ')[1], 'timeismoney')
+      if(parseInt(req.params.id) === currentUser.employeeNum){
+        User
+        .findOne({employeeNum: req.params.id}).populate(
+          {
+            path: 'timesheets',
+            populate: {
+              path: 'punch'
+            }
+
+        })        
+        .then(user=>{
+          res.json(user.timesheets)
+        })
+        
+        .catch(err => res.status(422).json(err));
+      }else{
+        res.status(401).json({message: 'You are unauthorized to access this resource'})
+      }
+      
     },
     create: function(req, res) {
       Timesheet.create(req.body.timesheet)

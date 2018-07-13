@@ -5,14 +5,14 @@ import moment from 'moment';
 import clone from 'lodash/clone';
 
 
-import Timeheader from './Timeheader';
-import Timetable from './Timetable';
+import Timeheader from './TimeHeader';
+import Timetable from './TimeTable';
 
 import { saveTimesheet } from '../../actions/timesheet';
 
-import { calculateHours, calculateTotalHours } from '../../utils/moment';
+import { calculateHours, calculateTotalHours } from '../../util/moment';
 
-import './TimesStyle.scss';
+//import './TimesStyle.scss';
 
 class Timesheet extends Component {
   constructor(props) {
@@ -82,7 +82,7 @@ class Timesheet extends Component {
   }
 
   render() {
-    const date = moment(this.props.currentTimesheet.week_commencing).format('YYYY-MM-DD');
+    //const date = moment(this.props.currentTimesheet.week_commencing).format('YYYY-MM-DD');
     const { showWeekend } = this.state;
     const total = calculateTotalHours(this.state.timesheet);
     
@@ -91,7 +91,7 @@ class Timesheet extends Component {
         <div className="section">
             <div className="row">
                 <Timeheader
-                    date={ date }
+                    //date={ date }
                     toggleWeekend={ this.toggleWeekend }
                     saveTimesheet={ this.saveTimesheet }
                     clearTimesheet={ this.clearTimesheet }
@@ -113,28 +113,28 @@ class Timesheet extends Component {
   }
 }
 
-const dayPropTypes = {
-  start: PropTypes.string.isRequired,
-  lunch: PropTypes.string.isRequired,
-  finish: PropTypes.string.isRequired,
-  hours: PropTypes.string.isRequired,
-};
+// const dayPropTypes = {
+//   start: PropTypes.string.isRequired,
+//   lunch: PropTypes.string.isRequired,
+//   finish: PropTypes.string.isRequired,
+//   hours: PropTypes.string.isRequired,
+// };
 
-Timesheet.propTypes = {
-  currentTimesheet: PropTypes.shape({
-    week_commencing: PropTypes.string.isRequired,
-    days: PropTypes.shape({
-      monday: PropTypes.shape(dayPropTypes).isRequired,
-      tuesday: PropTypes.shape(dayPropTypes).isRequired,
-      wednesday: PropTypes.shape(dayPropTypes).isRequired,
-      thursday: PropTypes.shape(dayPropTypes).isRequired,
-      friday: PropTypes.shape(dayPropTypes).isRequired,
-      saturday: PropTypes.shape(dayPropTypes).isRequired,
-      sunday: PropTypes.shape(dayPropTypes).isRequired,
-    }).isRequired,
-  }).isRequired,
-  saveTimesheet: PropTypes.func.isRequired,
-};
+// Timesheet.propTypes = {
+//   currentTimesheet: PropTypes.shape({
+//     week_commencing: PropTypes.string.isRequired,
+//     days: PropTypes.shape({
+//       monday: PropTypes.shape(dayPropTypes).isRequired,
+//       tuesday: PropTypes.shape(dayPropTypes).isRequired,
+//       wednesday: PropTypes.shape(dayPropTypes).isRequired,
+//       thursday: PropTypes.shape(dayPropTypes).isRequired,
+//       friday: PropTypes.shape(dayPropTypes).isRequired,
+//       saturday: PropTypes.shape(dayPropTypes).isRequired,
+//       sunday: PropTypes.shape(dayPropTypes).isRequired,
+//     }).isRequired,
+//   }).isRequired,
+//   saveTimesheet: PropTypes.func.isRequired,
+// };
 
 function mapStateToProps(state) {
   return {

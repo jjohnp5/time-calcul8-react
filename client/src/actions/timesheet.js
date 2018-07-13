@@ -48,7 +48,7 @@ function updateCurrentTimesheet(timesheet) {
 
 export function fetchTimesheetById(id) {
   return (dispatch) => {
-    return axios.get(`/api/timesheets/${userId}`)
+    return axios.get(`/api/timesheets/${id}`)
       .then(response => response.data)
       .then(timesheet => dispatch(updateCurrentTimesheet(timesheet)));
   };

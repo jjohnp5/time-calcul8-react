@@ -4,27 +4,43 @@ const {User} = require('../models/User');
 
 module.exports = {
     create: function(req, res) {
-        Punch.create(req.body.punch)
-            .then(punch=>{
-                User.find({employeeNum: req.body.id})
-                .then(user=>{
-                    Timesheet
-                    .find({employeeNum: user.employeeNum}, {sort: {addedDate: -1} })
+        User.find({employeeNum: req.body.id})
+            .then(user=>{
+                console.log(user)
+                Timesheet
+                    .find({employeeNum: user.employeeNum})
+                    .sort({addedDate:-1})
                     .then(timesheet=>{
-                        if(timesheet[0].punch.length < 2){
-                            Timesheet.findOneAndUpdate({_id: timesheet[0]._id}, {$push:{punch: punch._id}})
+                        console.log(timesheet[0])
+                        if(timesheet[0] && timesheet[0].punch.length < 2){
+                            console.log('hit')
+                            Punch.create(req.body.punch).then(pun=>{
+                                console.log(pun)
+                                Timesheet.findOneAndUpdate({_id: timesheet[0]._id}, {$push:{punch: pun._id}}).exec()
+                                .then(pun=>{
+                                    return res.json(pun)
+                                })
+                            })
+                        
+                            
                         }else{
                             Timesheet.create({employeeNum: user._id})
-                                .then(timesheet=>{
-                                    timesheet.update({punch: punch._id})
-                                })
+                            .then(ts=>{
+                                Punch.create(req.body.punch)
+                                    .then(pun=>{
+                                        console.log(pun)
+                                        Timesheet.findOneAndUpdate({_id: ts._id}, {$push: {punch: pun._id}}).exec()
+
+                                        User.findOneAndUpdate({_id: user[0]._id}, {$push: {timesheets: ts._id}}).exec().then(u=>{
+                                            return res.json(u)
+                                        })
+                                        
+                                    })
+                            })
                         }
-                    })
-                    .catch(err=>res.status(422).json(err))
-                })
-                
-            }).then(punch=>res.json(punch))
-            .catch(err=>res.status(422).json(err))
+            })
+        })
+        
     },
     update: function(req, res) {
       Punch
