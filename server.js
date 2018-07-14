@@ -27,16 +27,18 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglis
 mongoose.Promise = global.Promise;
 const {User} = require('./models/User')
 passport.use('employee', new LocalStrategy((username, password, done) => {
-  console.log(username)
-  User.find({
+  console.log(password)
+  User.findOne({
       employeeNum: username
   }).then(data => {
-      const pw = data[0].password;
+    console.log(data);
+      const pw = data.password;
       bcrypt.compare(password, pw, (err, response) => {
           if (err) {
+              console.log(err);
               return done(null, false, { message: 'Incorrect username or password' });
           }
-          return done(null, data[0]);
+          return done(null, data);
       })
   })
 }))
@@ -47,9 +49,8 @@ passport.use('employee', new LocalStrategy((username, password, done) => {
 app.post('/login', (req,res)=>{
   passport.authenticate('employee', {session: false}, (err, user, info)=>{
     if (err || !user) {
-      return res.status(400).json({
-          message: 'Unable to process request',
-          user   : user
+      return res.status(401).json({
+          err
       });
   }
   req.login(user, {session: false}, (err) => {
@@ -58,7 +59,7 @@ app.post('/login', (req,res)=>{
      }
      console.log(user)
      // generate a signed son web token with the contents of user object and return it in the response
-     const token = jwt.sign({id:user._id, position: user.position, employeeNum: user.employeeNum}, 'timeismoney');
+     const token = jwt.sign({id:user._id, position: user.position, employeeNum: user.employeeNum, firstName: user.firstName, lastName: user.lastName}, 'timeismoney');
      return res.json({token});
   });
 

@@ -6,7 +6,7 @@ export const AUTH_USER = 'AUTH_USER'
 export const LOGOUT_USER = 'LOGOUT_USER'
 
 
- function addUser(user){
+function addUser(user){
     return {
         type: AUTH_USER,
         user
@@ -35,15 +35,29 @@ export function handleAddUser(username, password, history){
             .then((token)=>{
 
                 axios.defaults.headers.common.Authorization = `Bearer ${token.data.token}`;
+                console.log(token.data.token)
                 const decoded = jwt_decode(token.data.token)
-                console.log(decoded)
+                localStorage.setItem('token', token.data.token)
                 dispatch(addUser(decoded))
                 dispatch(handleMapUserTimesheets(decoded.employeeNum))
                 history.push('/timesheet')
-            }).catch(()=>{
-
-                alert('Error adding user.')
+            }).catch((err)=>{
+                console.log(err);
                 history.push('/')
             })
+    }
+}
+export const logoutUser = () => dispatch => {
+    localStorage.removeItem('token')
+    delete axios.defaults.headers.common.Authorization;
+    dispatch(removeUser({}));
+    window.location = '/'
+}
+export const setLocalUser = (token) => {
+    return(dispatch)=>{
+        axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+        const decoded = jwt_decode(token)
+        dispatch(addUser(decoded))
+        dispatch(handleMapUserTimesheets(decoded.employeeNum))
     }
 }

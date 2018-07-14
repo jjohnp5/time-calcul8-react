@@ -20,34 +20,34 @@ export default class Home extends React.Component {
                         <div className="row d-flex justify-content-center text-center text-white">
 
                             <div className="col-12 mt-2 text-white">
-
+                            <h5 className="icon-label"> Punch 
                                 <Link to="/punch">
-                                    <strong> Punch </strong>
+                                    
                                     <img className="img-responsive center-block mb-5 d-block mx-auto" src={profilepic} width="100" />
                                 </Link>
-
+                                </h5>
 
                             </div>
                         </div>
                             <div className="row d-flex justify-content-center text-center text-white">
 
                                 <div className="col-md-4 mt-2 text-white">
-
+                                <h5 className="icon-label"> Employee Login
                                     <Link to="/employee/login">
-                                        <strong> Employee Login</strong>
+                                        
                                         <img className="img-responsive center-block mb-5 d-block mx-auto" src={timesheet} width="100" />
                                     </Link>
-
+                                    </h5>
 
                                 </div>
 
                                     <div className="col-md-4 mt-2 text-lg">
-
+                                    <h5 className="icon-label">Manager Login
                                         <Link to="/manager/login">
-                                            <strong>Manager Login</strong>
+                                            
                                             <img className="img-responsive center-block mb-5 d-block mx-auto" src={manager} width="100" />
                                         </Link>
-
+                                        </h5>
                                     </div>
                             </div>
                     </div>

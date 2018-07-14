@@ -13,7 +13,7 @@ export default function user(state = {}, action){
             
             return {...action.user}
         case LOGOUT_USER:
-            return {...state, authUser: null}
+            return {...action.user}
         // case RECEIVE_DATA:
         //     return action.todos
         default:        

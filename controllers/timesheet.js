@@ -34,6 +34,7 @@ module.exports = {
 
         })        
         .then(user=>{
+          console.log(user)
           res.json(user.timesheets)
         })
         

@@ -22,7 +22,7 @@ class Login extends React.Component {
         event.preventDefault();
         
         const {username, password} = this.state
-        this.props.dispatch(handleAddUser(username, password))
+        this.props.dispatch(handleAddUser(username, password, this.props.history))
         
       };
     

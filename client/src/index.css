@@ -2,10 +2,28 @@
 
 body {
   min-height: 100vh;
-  min-width: 100vw;
-  background:url('./images/nyc_bg.jpg') center no-repeat;
+  min-width: 100%;
+  background:url('./images/clock.jpeg') center no-repeat;
   background-size: cover;
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  color: #ededee;
 }
+.timesheet-head{
+  text-align: center;
+  
+}
+.link-basic{
+  color: #ededee;
+
+}
+.link-basic:hover{
+  color: #bdbdc0;
+}
+.icon-label{
+  color: #e4e2e2;
+  text-decoration: none;
+}
+
+

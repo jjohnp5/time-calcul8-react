@@ -7,8 +7,5 @@ export default  {
         return axios.post('/login', {username, password}, {headers: {
             'Content-Type': 'application/json'
         }})
-    },
-    logout: ()=>{  
-        return axios.get('/logout')
     }
 }

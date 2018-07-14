@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import punch from "../util/punch";
 import {connect} from 'react-redux';
 import axios from 'axios';
+import {handleMapUserTimesheets} from '../actions/mapUserData'
 
 class Timepunch extends React.Component {
   componentDidMount(){
@@ -34,6 +35,8 @@ class Timepunch extends React.Component {
         {punchType: this.state.punchType}
       )
       .then(data => {
+        this.props.dispatch(handleMapUserTimesheets(this.props.authUser.employeeNum))
+        this.props.history.push('/')
         console.log(data);
       });
 
