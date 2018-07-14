@@ -1,30 +1,20 @@
 import React, { Component } from "react";
 import "./App.css";
 import {connect} from 'react-redux'
-<<<<<<< HEAD
-import ManagerView from "./components/ManagerView";
-=======
 import Home from './components/Home'
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import logo from './images/logo.png'
 import LoginEmployee from './components/Login-Employee'
 import LoginManager from './components/Login-Manager'
 import Timesheet from './components/Timesheet'
->>>>>>> 309d80b19c169686639d31d1628440d9770290a0
+import Registration from './components/Registration'
+import ManagerView from './components/ManagerView'
 
 class App extends Component {
   componentDidMount(){
   }
   render() {
     return (
-<<<<<<< HEAD
-      <React.Fragment>
-        {/* {!this.props.authUser ? 
-      <Login /> : */}
-      <Registration />
-      {/* <ManagerView /> */}
-      </React.Fragment>
-=======
       
       
       <Router>
@@ -44,10 +34,13 @@ class App extends Component {
           <Route exact path="/employee/login" component={LoginEmployee} />
           <Route exact path="/manager/login" component={LoginManager}/>
           <Route exact path='/timesheet' component={this.props.authUser.id ? Timesheet : Home} />
+          <Route exact path='/manager/home' component={this.props.authUser.id ? ManagerView : LoginManager}/>
+          <Route exact path="/manager/enroll" component={this.props.authUser.id ? Registration : LoginManager} />
+          <Route exact path="/manager/employee/:id" component={this.props.authUser.id ? Timesheet : LoginManager} />
+"
         </Switch>
         </React.Fragment>
       </Router>
->>>>>>> 309d80b19c169686639d31d1628440d9770290a0
     
     );
   }

@@ -1,73 +1,81 @@
-// import React from "react";
-// import { withRouter } from "react-router";
-// import user from "../util/user";
+import React from "react";
+import user from "../util/user";
+import punch from "../util/timeSheet";
 
-// class ManagerView extends React.Component {
-//   state = {
-//     employees: []
-//   };
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
-//   componentDidMount() {
-//     //blank state
-//     let usersList = [];
+class ManagerView extends React.Component {
+  state = {
+    employees: []
+  };
 
-//     //map through array of data
-//     this.showAllEmployees().then(
-//       users =>
-//         (usersList = users.map(employee => {
-//           return employee;
-//         }))
-//     );
-//     this.setState({ employees: usersList });
-//   }
+  componentDidMount() {
+    //map through array of data
+    this.showAllEmployees();
+  }
 
-//   //calling to DB to render employees
-//   showAllEmployees = () => {
-//     user
-//       .loadUsers()
-//       .then(res => {
-//         console.log(res);
-//       })
-//       .catch(err => console.log(err));
-//   };
+  //calling to DB to render employees
+  showAllEmployees = () => {
+    user
+      .loadUsers()
+      .then(res => {
+        this.setState({ employees: res.data });
+      })
+      .catch(err => console.log(err));
+  };
 
-//   handleEnrollRedirect = () => {
-//     this.props.history.push(" # "); //register route
-//   };
+  handleEnrollRedirect = () => {
+    this.props.history.push("/manager/enroll"); //register route
+  };
 
-//   handleTimeCardSelection = () => {
-//     const { name, value } = event.target;
-//     this.setState({ [name]: value });
-//   };
+  handleTimeCardSelection = event => {
+    //only taking in employeeNum, changed state to just employeeNum in order findbyID
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  };
 
-//   handleTimeCardSelectionSubmit = () => {};
+  //
+  handleTimeCardSelectionSubmit = event => {
+    event.preventDefault();
+    punch.findById(this.state.employees.employeeNum);
+    this.props.history.push(`/manager/employee/${this.state.employeeNum}`);
+  };
 
-//   render() {
+  render() {
+    let list = this.state.employees;
 
-//     let list = this.state.employees;
-//     let selectionsList = list.map(selection => <option key={selection.id}>Name: {selection.firstName} {selection.lastName}, Employee ID: {selection.id} </option> )
+    return (
+      <React.Fragment>
+        {/* direct to enroll */}
+        <Button type="submit" onClick={this.handleEnrollRedirect}>
+          Enroll
+        </Button>
 
+        {/* drop down selection for timecards */}
+        <FormGroup>
+          <Label for="Select">Select Employee</Label>
+          <Input
+            type="select"
+            name="employeeNum"
+            id="exampleSelect"
+            value={this.state.employees.employeeNum}
+            onChange={this.handleTimeCardSelection}
+          >
+            {list.map(selection => (
+              <option value={selection.employeeNum}>
+                Name: {selection.firstName} {selection.lastName}, Employee ID:{
+                  selection.employeeNum
+                }
+              </option>
+            ))}
+          </Input>
+          <Button type="submit" onClick={this.handleTimeCardSelectionSubmit}>
+            Show Card
+          </Button>
+        </FormGroup>
+      </React.Fragment>
+    );
+  }
+}
 
-//     return (
-//       <React.Fragment>
-//         {/* direct to enroll */}
-//         <Button onSubmit={this.handleEnrollRedirect}>Enroll</Button>
-
-//         {/* drop down selection for timecards */}
-
-//         <div className="selections" >
-//           <Input>
-          
-//           {selectionsList}
-//           </Input>
-
-          
-
-//         </div>
-        
-//       </React.Fragment>
-//     );
-//   }
-// }
-
-// export default withRouter(ManagerView);
+export default ManagerView;
