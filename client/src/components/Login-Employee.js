@@ -30,12 +30,9 @@ class Login extends React.Component {
   render () {
     return (
       <Container>
-        <h1>Login as Employee</h1>
+        <h3>Login as Employee</h3>
       <Form className="register-employee" >
         <FormGroup>
-          <Label for='username'>
-            Employee Number
-          </Label>
           <Input
             type='text'
             name='username'
@@ -45,9 +42,6 @@ class Login extends React.Component {
             />
         </FormGroup>
         <FormGroup>
-          <Label for='password'>
-            Last Name
-          </Label>
           <Input
             type='password'
             name='password'

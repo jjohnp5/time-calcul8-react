@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 import user from '../util/user'
 import {connect} from 'react-redux'
+import Nav from './Nav';
 
 class Registration extends React.Component {
 
@@ -28,15 +29,18 @@ class Registration extends React.Component {
         event.preventDefault();
         user.createUser(this.state)
           .then(data=>{
-            console.log(data)
+            this.setState({ firstName: "", lastName: "",position: ""});
+            this.props.history.push('/manager/home')
           })
-        this.setState({ firstName: "", lastName: "",position: ""});
+        
       };
     
 
   render () {
     console.log(this.props);
     return (
+      <React.Fragment>
+        <Nav />
       <Form className="register-employee" >
         <FormGroup>
           <Label for='firstName'>
@@ -95,7 +99,12 @@ class Registration extends React.Component {
         <Button type="submit" onClick={this.handleFormSubmit}>
           Submit
         </Button>
+        <Button color="danger" onClick={(e)=>{
+          e.preventDefault();
+          this.props.history.push('/manager/home')
+        }}>Cancel</Button>
       </Form>
+      </React.Fragment>
     )
   }
 }

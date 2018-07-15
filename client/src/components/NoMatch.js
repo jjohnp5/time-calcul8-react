@@ -9,7 +9,8 @@ class Unauthorized extends Component {
             <React.Fragment>
                 <br/>
                 <br/>
-            <h2 className="text-center">Unauthorized request.</h2>
+            <h2 className="text-center">Error 404.</h2>
+            <h4 className="text-center" >Resource not found</h4>
             <h4 className="text-center">Click <Link to="/" className="link-basic">here</Link> to go back to home page</h4>
             </React.Fragment>
         )

@@ -1,6 +1,4 @@
 import user from '../util/user'
-import axios from 'axios';
-import jwt_decode from 'jwt-decode'
 
 export const ADD_USER = 'ADD_USER'
 
@@ -19,7 +17,7 @@ export function handleMapUserTimesheets(id){
 
                 dispatch(userTimesheets(user.data))
             }).catch(()=>{
-                alert('Error adding user.')
+                alert('Error mapping user timesheets.')
             })
     }
 }

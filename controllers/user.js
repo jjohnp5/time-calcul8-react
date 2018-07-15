@@ -6,7 +6,13 @@ module.exports = {
     findAll: function(req, res) {
       User
         .find()
-        .sort({ date: -1 })
+        .sort({ employeeNum: 1 })
+        .populate({
+          path: 'timesheets',
+          populate: {
+            path: 'punch'
+          }
+        })
         .then(UserModel => res.json(UserModel))
         .catch(err => res.status(422).json(err));
     },

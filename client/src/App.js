@@ -9,8 +9,11 @@ import LoginManager from './components/Login-Manager'
 import Timesheet from './components/EmployeeTimesheet'
 import Timepunch from './components/Timepunch'
 import {setLocalUser} from './actions/authUser'
-import Nav from './components/Nav'
 import Unauthorized from './components/Unauthorized'
+import Registration from './components/Registration'
+import ManagerView from './components/ManagerView'
+import ManagerTimeSheet from './components/ManagerTimesheet'
+import NoMatch from './components/NoMatch'
 
 class App extends Component {
   componentDidMount(){
@@ -19,6 +22,7 @@ class App extends Component {
     }
   }
   render() {
+    console.log(this.props.authUser)
     return (
       
       
@@ -33,14 +37,19 @@ class App extends Component {
                 <hr className="star-light" />
             </div>
           </div>
-          <Nav />
         <Switch>
         
           <Route exact path="/" component={Home} />
-          <Route exact path="/punch" component={this.props.authUser.position === 2 ? Timepunch : Unauthorized} />
+          <Route exact path="/punch" component={this.props.authUser.position >= 2 ? Timepunch : Unauthorized} />
           <Route exact path="/employee/login" component={!this.props.authUser.id ? LoginEmployee : Timesheet} />
-          <Route exact path="/manager/login" component={!this.props.authUser.id || !this.props.authUser.position >= 2  ? LoginManager: Unauthorized}/>
+          <Route exact path="/manager/login" component={this.props.authUser.position >= 2 ? ManagerView : LoginManager}/>
           <Route exact path='/timesheet' component={this.props.authUser.id ? Timesheet : Home} />
+          <Route exact path='/manager/home' component={this.props.authUser.id && this.props.authUser.position < 2 ? LoginManager : ManagerView}/>
+          <Route exact path="/manager/enroll" component={this.props.authUser.position >= 2 ? Registration : LoginManager} />
+          <Route exact path="/manager/view/timesheet" component={this.props.authUser.id ? ManagerTimeSheet : LoginManager} />
+          <Route exact path="/unauthorized" component={Unauthorized} />
+          <Route component={NoMatch} />
+"
         </Switch>
         </div>
       </Router>

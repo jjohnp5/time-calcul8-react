@@ -1,16 +1,16 @@
 import {
-    ADD_USER
+    ADD_SHEET
 
 // import {
 //     RECEIVE_DATA
-} from '../actions/mapUserData'
+} from '../actions/viewSheet'
 
 
-export default function mapUser(state = [], action){
+export default function viewSheet(state = [], action){
     switch(action.type){
-        case ADD_USER:
+        case ADD_SHEET:
             
-            return action.user
+            return action.timesheet
         // case RECEIVE_DATA:
         //     return action.todos
         default:        

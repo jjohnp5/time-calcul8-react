@@ -1,16 +1,16 @@
 import {
-    ADD_USER
+    MAP_USERS
 
 // import {
 //     RECEIVE_DATA
-} from '../actions/mapUserData'
+} from '../actions/managerMapUsers'
 
 
-export default function mapUser(state = [], action){
+export default function managedUsers(state = [], action){
     switch(action.type){
-        case ADD_USER:
+        case MAP_USERS:
             
-            return action.user
+            return action.users
         // case RECEIVE_DATA:
         //     return action.todos
         default:        

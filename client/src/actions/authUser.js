@@ -1,3 +1,4 @@
+import {showLoading, hideLoading} from 'react-redux-loading-bar'
 import user from '../util/login'
 import axios from 'axios';
 import jwt_decode from 'jwt-decode'
@@ -31,6 +32,7 @@ export function handleLogoutUser(i){
 }
 export function handleAddUser(username, password, history){
     return (dispatch) => {
+        dispatch(showLoading())
         return user.login(username, password)
             .then((token)=>{
 
@@ -40,10 +42,11 @@ export function handleAddUser(username, password, history){
                 localStorage.setItem('token', token.data.token)
                 dispatch(addUser(decoded))
                 dispatch(handleMapUserTimesheets(decoded.employeeNum))
+                dispatch(hideLoading())
                 history.push('/timesheet')
             }).catch((err)=>{
                 console.log(err);
-                history.push('/')
+                history.push('/unauthorized')
             })
     }
 }

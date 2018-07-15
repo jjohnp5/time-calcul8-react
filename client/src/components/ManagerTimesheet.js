@@ -7,7 +7,7 @@ import AddMile from './AddMile'
 
 import Nav from './Nav'
 
-class Timesheet extends React.Component {
+class ManagerTimesheet extends React.Component {
     
 
     render(){
@@ -15,10 +15,11 @@ class Timesheet extends React.Component {
         return(
             <React.Fragment>
                 <Nav />
+               
                 <h2 className="timesheet-head">{this.props.user.firstName} {this.props.user.lastName}'s Timecard</h2>
                 {
                     this.props.user.position >= 2 ? 
-                        (<Link to="/manager/home"><Button color="primary">View Employee Timesheets</Button></Link>)
+                        (<Link to="/manager/home"><Button color="primary">Back</Button></Link>)
                         :
                         null
 
@@ -75,4 +76,4 @@ class Timesheet extends React.Component {
 }
 
 
-export default connect(store=>({timesheet: store.userTimesheets, user: store.authUser}))(Timesheet)
+export default connect(store=>({timesheet: store.viewSheet, user: store.authUser}))(ManagerTimesheet)

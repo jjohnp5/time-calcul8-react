@@ -10,6 +10,7 @@ passport.use(jwtStrategy);
 // Matches with "/api/user"
 router.route("/")
   .get(passport.authenticate('mgr', { session: false }), userController.findAll)
+  // .get(userController.findAll)
   .post(userController.create);
 
 // Matches with "/api/user/:id"
