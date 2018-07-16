@@ -7,7 +7,7 @@ import manager from '../images/manager.png'
 
 
 
-export default class Home extends React.Component {
+class Home extends React.Component {
     componentDidMount(){
         this.props.history.push('/');
     }
@@ -23,7 +23,7 @@ export default class Home extends React.Component {
                             <h5 className="icon-label"> Punch 
                                 <Link to="/punch">
                                     
-                                    <img className="img-responsive center-block mb-5 d-block mx-auto" src={profilepic} width="100" />
+                                    <img alt="punch" className="img-responsive center-block mb-5 d-block mx-auto" src={profilepic} width="100" />
                                 </Link>
                                 </h5>
 
@@ -35,7 +35,7 @@ export default class Home extends React.Component {
                                 <h5 className="icon-label"> Employee Login
                                     <Link to="/employee/login">
                                         
-                                        <img className="img-responsive center-block mb-5 d-block mx-auto" src={timesheet} width="100" />
+                                        <img alt="employee login" className="img-responsive center-block mb-5 d-block mx-auto" src={timesheet} width="100" />
                                     </Link>
                                     </h5>
 
@@ -45,7 +45,7 @@ export default class Home extends React.Component {
                                     <h5 className="icon-label">Manager Login
                                         <Link to="/manager/login">
                                             
-                                            <img className="img-responsive center-block mb-5 d-block mx-auto" src={manager} width="100" />
+                                            <img alt="manager login" className="img-responsive center-block mb-5 d-block mx-auto" src={manager} width="100" />
                                         </Link>
                                         </h5>
                                     </div>
@@ -62,3 +62,4 @@ export default class Home extends React.Component {
                 }
                 
                 
+export default connect()(Home)

@@ -1,9 +1,7 @@
 import React from "react";
-import user from "../util/user";
-import punch from "../util/timeSheet";
 import {handleManagedUsers} from '../actions/managerMapUsers'
 import {connect} from 'react-redux'
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, FormGroup, Label, Input } from "reactstrap";
 import Nav from './Nav'
 import {handleViewTimesheet} from '../actions/viewSheet'
 

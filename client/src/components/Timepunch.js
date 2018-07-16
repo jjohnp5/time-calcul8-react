@@ -1,8 +1,7 @@
 import React from "react";
-import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import punch from "../util/punch";
 import {connect} from 'react-redux';
-import axios from 'axios';
 import {handleMapUserTimesheets} from '../actions/mapUserData'
 
 class Timepunch extends React.Component {

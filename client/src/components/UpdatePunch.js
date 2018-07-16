@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import {connect} from 'react-redux'
 import {Button, Input, FormGroup} from 'reactstrap';
-import {handleUpdateSheet, handleUpdatePunch} from '../actions/viewSheet'
+import { handleUpdatePunch} from '../actions/viewSheet'
 import API from '../util/punch'
 import moment from 'moment';
 

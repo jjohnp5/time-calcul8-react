@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap'
+import { Button, Form, FormGroup, Input, Container } from 'reactstrap'
 import {connect} from 'react-redux'
 import { handleAddUser } from '../actions/authUser';
 

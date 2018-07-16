@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux';
 import moment from 'moment'
 import {Table, Button} from 'reactstrap'
-import AddMile from './AddMile'
 
 import Nav from './Nav'
 
