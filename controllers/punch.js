@@ -1,20 +1,19 @@
 const Punch = require('../models/Punch')
 const Timesheet = require('../models/Timesheet')
 const {User} = require('../models/User');
+const moment = require('moment')
 
 module.exports = {
     create: function(req, res) {
         User.find({employeeNum: req.body.id})
             .then(user=>{
-                console.log(user)
                 Timesheet
                     .find({employeeNum: user.employeeNum})
                     .sort({addedDate:-1})
                     .then(timesheet=>{
-                        console.log(timesheet[0])
+
                         if(timesheet[0] && timesheet[0].punch.length < 2){
-                            console.log('hit')
-                            Punch.create(req.body.punch).then(pun=>{
+                            Punch.create({...req.body.punch, punchType: "Out"}).then(pun=>{
                                 console.log(pun)
                                 Timesheet.findOneAndUpdate({_id: timesheet[0]._id}, {$push:{punch: pun._id}}).exec()
                                 .then(pun=>{

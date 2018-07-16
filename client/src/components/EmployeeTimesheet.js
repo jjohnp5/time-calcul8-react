@@ -11,7 +11,6 @@ class Timesheet extends React.Component {
     
 
     render(){
-        console.log(this.props)
         return(
             <React.Fragment>
                 <Nav />
@@ -34,7 +33,7 @@ class Timesheet extends React.Component {
                 </tr>
             </thead>
             <tbody>
-                {this.props.timesheet.map(u=>{
+                {this.props.timesheet.map((u,ind)=>{
                     const date = moment(u.addedDate)
                     return (
                         <tr key={u._id}>
@@ -54,10 +53,7 @@ class Timesheet extends React.Component {
                                     <td>{pun.format('LT')}</td>
                                 )})}
                                 <td>
-                                    <AddMile 
-                                        milesTraveled={u.milesTraveled}
-                                        timesheetId={u._id}
-                                     />
+                                    <td>{u.milesTraveled}</td>
                                 </td>
                             </tr>
                     )

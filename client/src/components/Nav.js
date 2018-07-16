@@ -10,7 +10,6 @@ class Nav extends Component {
         this.props.dispatch(logoutUser())
     }
     render(){
-        console.log(this.props);
         return (
 
             <div className="row">

@@ -1,5 +1,6 @@
 import {
-    ADD_SHEET
+    ADD_SHEET,
+    UPDATE_SHEET
 
 // import {
 //     RECEIVE_DATA
@@ -11,8 +12,14 @@ export default function viewSheet(state = [], action){
         case ADD_SHEET:
             
             return action.timesheet
-        // case RECEIVE_DATA:
-        //     return action.todos
+        case UPDATE_SHEET:
+            console.log(state)
+            return state.map((s,i)=>{
+                if(i === action.id){
+                    s.milesTraveled = action.milesTraveled
+                }
+                return s
+            })
         default:        
             return state
     }

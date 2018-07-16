@@ -13,7 +13,6 @@ export function handleManagedUsers(history){
     return (dispatch) => {
         return user.loadUsers()
             .then((users)=>{
-                console.log(user)
 
                 dispatch(managedUsers(users.data))
                 history.push('/manager/home')

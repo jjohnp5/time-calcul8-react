@@ -1,6 +1,8 @@
 import React, { Component} from 'react';
 import {connect} from 'react-redux'
 import {Button, Input, FormGroup} from 'reactstrap';
+import {updateTimesheet} from '../util/timeSheet'
+import {handleUpdateSheet} from '../actions/viewSheet'
 
 
 class AddMile extends Component {
@@ -24,6 +26,17 @@ class AddMile extends Component {
         }
     )
     }
+    handleAddMile = (e) => {
+        
+        e.preventDefault();
+        updateTimesheet(this.props.timesheetId, {milesTraveled: this.state.milesTraveled})
+            .then(d=>{
+                this.props.dispatch(handleUpdateSheet({id: this.props.ind, milesTraveled: this.state.milesTraveled}))
+                this.setState({addingMile: !this.state.addingMile})
+            }
+            )
+            
+    }
     render(){
         return (
             <div>
@@ -32,11 +45,10 @@ class AddMile extends Component {
                     <FormGroup>
                     <Input type='number' name="milesTraveled" 
                         value={this.state.milesTraveled}
-                        onBlur={this.updateAddingMile}
                         onChange={this.handleInputChange} autoFocus={true} />
                     
                     </FormGroup>
-                    <Button color="success">Update Miles</Button>
+                    <Button color="success" onClick={this.handleAddMile}>Update Miles</Button>
                     </React.Fragment>
                     :
                     <Input onClick={this.updateAddingMile} placeholder={this.state.milesTraveled}    />

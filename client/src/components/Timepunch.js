@@ -37,10 +37,8 @@ class Timepunch extends React.Component {
       .then(data => {
         this.props.dispatch(handleMapUserTimesheets(this.props.authUser.employeeNum))
         this.props.history.push('/')
-        console.log(data);
       });
 
-    console.log(this.state);
   };
 
   render() {

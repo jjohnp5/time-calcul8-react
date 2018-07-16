@@ -13,7 +13,6 @@ export function handleMapUserTimesheets(id){
     return (dispatch) => {
         return user.getUsers(id)
             .then((user)=>{
-                console.log(user)
 
                 dispatch(userTimesheets(user.data))
             }).catch(()=>{

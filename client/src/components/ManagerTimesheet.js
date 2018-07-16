@@ -11,7 +11,6 @@ class ManagerTimesheet extends React.Component {
     
 
     render(){
-        console.log(this.props)
         return(
             <React.Fragment>
                 <Nav />
@@ -35,7 +34,7 @@ class ManagerTimesheet extends React.Component {
                 </tr>
             </thead>
             <tbody>
-                {this.props.timesheet.map(u=>{
+                {this.props.timesheet.map((u,ind)=>{
                     const date = moment(u.addedDate)
                     return (
                         <tr key={u._id}>
@@ -43,6 +42,7 @@ class ManagerTimesheet extends React.Component {
                                 <th scope="row">{date.format('YYYY-MMM-DD')}</th>
                                 {u.punch.map((p,i,a)=>{
                                     const pun = moment(p.addedDate)
+                                    console.log(moment(pun.format('YYYY-MM-DD')).format())
                                     if(a.length < 2){
                                         return(
                                         <React.Fragment>
@@ -58,6 +58,8 @@ class ManagerTimesheet extends React.Component {
                                     <AddMile 
                                         milesTraveled={u.milesTraveled}
                                         timesheetId={u._id}
+                                        history={this.props.history}
+                                        ind={ind}
                                      />
                                 </td>
                             </tr>

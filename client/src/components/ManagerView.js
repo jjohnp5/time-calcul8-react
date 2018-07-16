@@ -12,6 +12,7 @@ class ManagerView extends React.Component {
   componentDidMount() {
     //map through array of data
     this.showAllEmployees();
+    
   }
 
   //calling to DB to render employees
@@ -29,9 +30,10 @@ class ManagerView extends React.Component {
   };
 
   handleChange = e => {
-    console.log(e.target)
     //only taking in employeeNum, changed state to just employeeNum in order findbyID
-    this.props.dispatch(handleViewTimesheet(this.props.store.managedUsers[e.target.value].timesheets))
+    if(e.target.value){
+      this.props.dispatch(handleViewTimesheet(this.props.store.managedUsers[e.target.value].timesheets))
+    }
   };
 
   //
@@ -42,8 +44,8 @@ class ManagerView extends React.Component {
   };
 
   render() {
+    
     // let list = this.state.employees;
-    console.log(this.props)
     return (
       <React.Fragment>
         <Nav/>
@@ -63,9 +65,10 @@ class ManagerView extends React.Component {
             type="select"
             name="employeeNum"
             id="exampleSelect"
-            value={null}
+            defaultValue={null}
             onChange={this.handleChange}
           >
+          <option></option>
             {this.props.store.managedUsers.map((selection,i) => 
               (
               

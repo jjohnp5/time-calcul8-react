@@ -32,20 +32,18 @@ export function handleLogoutUser(i){
 }
 export function handleAddUser(username, password, history){
     return (dispatch) => {
-        dispatch(showLoading())
         return user.login(username, password)
             .then((token)=>{
 
                 axios.defaults.headers.common.Authorization = `Bearer ${token.data.token}`;
-                console.log(token.data.token)
+
                 const decoded = jwt_decode(token.data.token)
                 localStorage.setItem('token', token.data.token)
                 dispatch(addUser(decoded))
                 dispatch(handleMapUserTimesheets(decoded.employeeNum))
-                dispatch(hideLoading())
+
                 history.push('/timesheet')
             }).catch((err)=>{
-                console.log(err);
                 history.push('/unauthorized')
             })
     }
