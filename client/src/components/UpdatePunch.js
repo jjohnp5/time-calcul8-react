@@ -42,7 +42,7 @@ class UpdatePunch extends Component {
         e.preventDefault();
             API.updatePunch(this.props.timesheetId, this.state.punch, this.state.updatePunch)
                 .then(p=>{
-                    console.log(p);
+                    this.setState({updatingPunch: false})
                     this.props.dispatch(handleUpdatePunch({id: this.props.timesheetId, updatePunch: this.state.updatePunch, punch: p.data}))
                 }).catch(err=>{
                     console.log(err);
