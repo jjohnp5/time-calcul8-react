@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import moment from 'moment'
 import {Table, Button} from 'reactstrap'
 import AddMile from './AddMile'
+import UpdatePunch from './UpdatePunch'
 
 import Nav from './Nav'
 
@@ -46,13 +47,13 @@ class ManagerTimesheet extends React.Component {
                                     if(a.length < 2){
                                         return(
                                         <React.Fragment>
-                                        <td>{pun.format('LT')}</td>
-                                        <td></td>
+                                        <td><UpdatePunch punch={p} timesheetId={u._id} updatePunch={true}/></td>
+                                        <td><UpdatePunch updatePunch={false} newPunch={p} timesheetId={u._id}/></td>
                                         </React.Fragment>)
                                     }
                                     return (
                                      
-                                    <td>{pun.format('LT')}</td>
+                                    <td><UpdatePunch punch={p} timesheetId={u._id} updatePunch={true}/></td>
                                 )})}
                                 <td>
                                     <AddMile 

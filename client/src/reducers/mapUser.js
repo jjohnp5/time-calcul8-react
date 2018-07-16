@@ -1,5 +1,5 @@
 import {
-    ADD_USER
+    MAP_USER_TIMESHEET
 
 // import {
 //     RECEIVE_DATA
@@ -8,7 +8,7 @@ import {
 
 export default function mapUser(state = [], action){
     switch(action.type){
-        case ADD_USER:
+        case MAP_USER_TIMESHEET:
             
             return action.user
         // case RECEIVE_DATA:

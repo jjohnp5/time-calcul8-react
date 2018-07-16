@@ -2,6 +2,7 @@
 
 export const ADD_SHEET = 'ADD_SHEET';
 export const UPDATE_SHEET = 'UPDATE_SHEET'
+export const UPDATE_PUNCH = 'UPDATE_PUNCH'
 
 function addUserSheets(timesheet){
     return {
@@ -15,6 +16,12 @@ function updateUserSheets(updateData){
         updateData
     }
 }
+function updatePunch(updateData){
+    return {
+        type: UPDATE_PUNCH,
+        updateData
+    }
+}
 
 export function handleViewTimesheet(sheet){
     return (dispatch) => {
@@ -24,5 +31,11 @@ export function handleViewTimesheet(sheet){
 export function handleUpdateSheet(sheet){
     return (dispatch)=>{
         dispatch(updateUserSheets(sheet))
+    }
+}
+
+export function handleUpdatePunch(punch){
+    return (dispatch)=>{
+        dispatch(updatePunch(punch))
     }
 }

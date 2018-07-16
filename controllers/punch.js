@@ -53,6 +53,25 @@ module.exports = {
         .then(punch => punch.remove())
         .then(punch => res.json(punch))
         .catch(err => res.status(422).json(err));
+    },
+    upsert: function(req,res){
+        console.log(req.body)
+        if(req.body.updatePunch){
+            Punch.findOneAndUpdate({_id: req.body.punch._id}, req.body.punch)
+                .then(punch=>{
+                    console.log(punch)
+                    return res.json(punch)
+                })
+        }else{
+            Punch.create(req.body.punch)
+                .then(punch=>{
+                    console.log(punch)
+                    Timesheet.findOneAndUpdate({_id: req.params.timesheetId}, {$push: {punch: punch._id}}).exec()
+                        .then(d=>res.json(punch))
+                        .catch(err=>res.status(422).json(err))
+                })                
+                .catch(err=>res.status(422).json(err))
+        }
     }
   };
   

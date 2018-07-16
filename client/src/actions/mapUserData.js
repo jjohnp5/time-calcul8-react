@@ -1,10 +1,10 @@
 import user from '../util/user'
 
-export const ADD_USER = 'ADD_USER'
+export const MAP_USER_TIMESHEET = 'ADD_USER'
 
 function userTimesheets(user){
     return {
-        type: ADD_USER,
+        type: MAP_USER_TIMESHEET,
         user
     }
 }

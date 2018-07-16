@@ -12,9 +12,7 @@ class Timepunch extends React.Component {
   }
   
   state = {
-    employeeId: "",
-    punchType: "In",
-    in: false
+    employeeId: ""
   };
 
   handleInputChange = event => {
@@ -26,13 +24,11 @@ class Timepunch extends React.Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    this.state.in
-      ? this.setState({ employeeId: this.state.employeeId,punchType: "In", in: false})
-      : this.setState({ employeeId: this.state.employeeId,punchType: "Out", in: true });
+
 
     punch
       .createPunch(this.state.employeeId,
-        {punchType: this.state.punchType}
+        {}
       )
       .then(data => {
         this.props.dispatch(handleMapUserTimesheets(this.props.authUser.employeeNum))
@@ -52,7 +48,7 @@ class Timepunch extends React.Component {
             id="employeeId"
             placeholder="Please enter your Employee ID"
             onChange={this.handleInputChange}
-            value={this.state.id}
+            value={this.state.employeeId}
           />
         </FormGroup>
 
@@ -61,7 +57,7 @@ class Timepunch extends React.Component {
           class="btn btn-success"
           onClick={this.handleFormSubmit}
         >
-          Clock {this.state.punch}
+          Punch
         </Button>
       </Form>
     );

@@ -12,5 +12,8 @@ export default  {
     },
     removePunch: function(punchId){
         return axios.delete('/api/punch/'+punchId)
+    },
+    updatePunch: function(timesheetId, punch, updatePunch){
+        return axios.put('/api/punch/upsert/'+ timesheetId, {punch: punch, updatePunch: updatePunch})
     }
 }

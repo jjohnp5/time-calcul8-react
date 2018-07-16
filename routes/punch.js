@@ -15,5 +15,7 @@ router
   .route("/:id")
   .put(protected, punchController.update)
   .delete(passport.authenticate('mgr', { session: false }), punchController.remove);
-
+router
+  .route('/upsert/:timesheetId')
+  .put(passport.authenticate('mgr', {session: false}), punchController.upsert)
 module.exports = router;
