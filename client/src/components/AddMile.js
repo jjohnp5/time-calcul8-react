@@ -12,8 +12,7 @@ class AddMile extends Component {
     }
     updateAddingMile = () => {
         this.setState({
-        addingMile: !this.state.addingMile,
-        milesTraveled: this.props.milesTraveled
+        addingMile: !this.state.addingMile
         })
     }
 
@@ -42,13 +41,14 @@ class AddMile extends Component {
             <div>
                 {this.state.addingMile ? 
                 <React.Fragment>
-                    <FormGroup>
+                    <FormGroup onBlur={this.updateAddingMile}>
                     <Input type='number' name="milesTraveled" 
                         value={this.state.milesTraveled}
                         onChange={this.handleInputChange} autoFocus={true} />
                     
-                    </FormGroup>
+                    
                     <Button color="success" onClick={this.handleAddMile}>Update Miles</Button>
+                    </FormGroup>
                     </React.Fragment>
                     :
                     <Input onClick={this.updateAddingMile} placeholder={this.state.milesTraveled}    />

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, Col, Container } from "reactstrap";
 import punch from "../util/punch";
 import {connect} from 'react-redux';
 import {handleMapUserTimesheets} from '../actions/mapUserData'
@@ -38,6 +38,7 @@ class Timepunch extends React.Component {
 
   render() {
     return (
+      <Container>
       <Form className="Time-Punch">
         <FormGroup>
           <Label for="employeeId">Enter Your ID</Label>
@@ -50,15 +51,19 @@ class Timepunch extends React.Component {
             value={this.state.employeeId}
           />
         </FormGroup>
-
+        <Col xs={{size: 4, offset: 4}}>
         <Button
+          block
+          size="lg"
           type="button"
-          class="btn btn-success"
+          className="btn btn-success"
           onClick={this.handleFormSubmit}
         >
           Punch
         </Button>
+        </Col>
       </Form>
+      </Container>
     );
   }
 }

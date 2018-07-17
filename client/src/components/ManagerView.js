@@ -1,9 +1,10 @@
 import React from "react";
 import {handleManagedUsers} from '../actions/managerMapUsers'
 import {connect} from 'react-redux'
-import { Button, FormGroup, Label, Input } from "reactstrap";
+import { Button, FormGroup, Label, Input, Col, Container } from "reactstrap";
 import Nav from './Nav'
 import {handleViewTimesheet} from '../actions/viewSheet'
+import {handleViewUser} from '../actions/viewUser'
 
 class ManagerView extends React.Component {
   
@@ -28,9 +29,11 @@ class ManagerView extends React.Component {
   };
 
   handleChange = e => {
+    const {firstName, lastName, employeeNum}=this.props.store.managedUsers[e.target.value]
     //only taking in employeeNum, changed state to just employeeNum in order findbyID
     if(e.target.value){
       this.props.dispatch(handleViewTimesheet(this.props.store.managedUsers[e.target.value].timesheets))
+      this.props.dispatch(handleViewUser({firstName, lastName, employeeNum}))
     }
   };
 
@@ -45,12 +48,12 @@ class ManagerView extends React.Component {
     
     // let list = this.state.employees;
     return (
-      <React.Fragment>
+      <Container>
         <Nav/>
         <br/>
         <br/>
         {/* direct to enroll */}
-        <Button type="submit" onClick={()=>{this.props.history.push('/manager/enroll')}}>
+        <Button size="lg" color="info" type="submit" onClick={()=>{this.props.history.push('/manager/enroll')}}>
           Enroll
         </Button>
         
@@ -70,7 +73,7 @@ class ManagerView extends React.Component {
             {this.props.store.managedUsers.map((selection,i) => 
               (
               
-              <option value={i} >
+              <option value={i} key={i}>
                 Name: {selection.firstName} {selection.lastName}, Employee ID:{
                   selection.employeeNum
                 }
@@ -78,11 +81,13 @@ class ManagerView extends React.Component {
             ))}
           </Input>
           <br/>
-          <Button type="submit" onClick={this.handleTimeCardSelectionSubmit}>
+          <Col xs={{size: 4, offset: 4}}>
+          <Button  block color="primary" type="submit" onClick={this.handleTimeCardSelectionSubmit}>
             Show Card
           </Button>
+          </Col>
         </FormGroup>
-      </React.Fragment>
+      </Container>
     );
   }
 }

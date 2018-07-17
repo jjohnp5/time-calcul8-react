@@ -39,6 +39,8 @@ passport.use('employee', new LocalStrategy((username, password, done) => {
           }
           return done(null, data);
       })
+  }).catch(err=>{
+    res.status(501).json(err)
   })
 }))
 

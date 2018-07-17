@@ -24,15 +24,15 @@ export default function viewSheet(state = [], action){
 
         case UPDATE_PUNCH:
             return state.map((s,i)=>{
-                if(s._id === action.updateData.id && action.updateData.updatePunch === false){
+                if(s._id === action.id && action.updatePunch === false){
                     console.log('hit')
-                    return {...s, punch : s.punch.concat([action.updateData.punch])}
-                }else if(s._id === action.updateData.id){
+                    return {...s, punch : s.punch.concat([action.punch])}
+                }else if(s._id === action.id){
                     console.log('hit')
                     return {...s, punch : s.punch.map(pun=>{
                         console.log(pun)
-                        if(pun._id === action.updateData.punch._id){
-                            return action.updateData.punch
+                        if(pun._id === action.punch._id){
+                            return action.punch
                         }
                         return pun
                     }) }

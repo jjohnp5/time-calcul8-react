@@ -19,7 +19,7 @@ function updateUserSheets(updateData){
 function updatePunch(updateData){
     return {
         type: UPDATE_PUNCH,
-        updateData
+        ...updateData
     }
 }
 

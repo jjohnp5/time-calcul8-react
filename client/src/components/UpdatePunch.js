@@ -55,13 +55,14 @@ class UpdatePunch extends Component {
             <div>
                 {this.state.updatingPunch ? 
                 <React.Fragment>
-                    <FormGroup>
+                    <FormGroup onBlur={this.updatingPunch}>
                     <Input type='time' name="addedDate" 
                         value={this.state.punch ? moment(this.state.punch.addedDate).format('HH:mm'): ""}
                         onChange={this.handleInputChange} autoFocus={true} />
                     
-                    </FormGroup>
+                    
                     <Button color="success" onClick={this.updatePunch}>Update Punch</Button>
+                    </FormGroup>
                     </React.Fragment>
                     :
                     <Input onClick={this.updatingPunch} placeholder={this.state.updatePunch ? moment(this.state.punch.addedDate).format('LT'): ""}    />

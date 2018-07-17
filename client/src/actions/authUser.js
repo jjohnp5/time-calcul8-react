@@ -1,4 +1,4 @@
-import {showLoading, hideLoading} from 'react-redux-loading-bar'
+
 import user from '../util/login'
 import axios from 'axios';
 import jwt_decode from 'jwt-decode'
@@ -44,6 +44,7 @@ export function handleAddUser(username, password, history){
 
                 history.push('/timesheet')
             }).catch((err)=>{
+                alert('Error connecting to DB')
                 history.push('/unauthorized')
             })
     }

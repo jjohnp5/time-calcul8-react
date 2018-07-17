@@ -2,16 +2,20 @@ import React from "react";
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux';
 import moment from 'moment'
-import {Table, Button} from 'reactstrap'
+import {Table, Button, Container} from 'reactstrap'
 
 import Nav from './Nav'
 
 class Timesheet extends React.Component {
-    
+    componentDidMount(){
+        if(!this.props.timesheet.length > 0){
+            this.props.history.push('/')
+        } 
+    }
 
     render(){
         return(
-            <React.Fragment>
+            <Container>
                 <Nav />
                 <h2 className="timesheet-head">{this.props.user.firstName} {this.props.user.lastName}'s Timecard</h2>
                 {
@@ -42,25 +46,25 @@ class Timesheet extends React.Component {
                                     const pun = moment(p.addedDate)
                                     if(a.length < 2){
                                         return(
-                                        <React.Fragment>
+                                        <React.Fragment key={i}>
                                         <td>{pun.format('LT')}</td>
                                         <td></td>
                                         </React.Fragment>)
                                     }
                                     return (
                                      
-                                    <td>{pun.format('LT')}</td>
+                                    <td key={i}>{pun.format('LT')}</td>
                                 )})}
-                                <td>
+                                
                                     <td>{u.milesTraveled}</td>
-                                </td>
+                                
                             </tr>
                     )
                 })
             }
                 </tbody>
                         </Table>
-                        </React.Fragment>
+                        </Container>
 
         )
     }
