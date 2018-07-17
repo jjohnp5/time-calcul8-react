@@ -55,7 +55,7 @@ class UpdatePunch extends Component {
             <div>
                 {this.state.updatingPunch ? 
                 <React.Fragment>
-                    <FormGroup onBlur={this.updatingPunch}>
+                    <FormGroup onKeyUp={(e)=>{if(e.keyCode === 27){this.updatingPunch()}}}>
                     <Input type='time' name="addedDate" 
                         value={this.state.punch ? moment(this.state.punch.addedDate).format('HH:mm'): ""}
                         onChange={this.handleInputChange} autoFocus={true} />

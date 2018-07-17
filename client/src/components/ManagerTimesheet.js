@@ -9,6 +9,7 @@ import UpdatePunch from './UpdatePunch'
 import Nav from './Nav'
 
 class ManagerTimesheet extends React.Component {
+    
     componentDidMount(){
         if(!this.props.timesheet.length > 0){
             this.props.history.push('/')

@@ -17,6 +17,7 @@ class AddMile extends Component {
     }
 
     handleInputChange = (e) => {
+        console.log(e.keyCode)
         const {name, value} = e.target;
         this.setState(()=>{ 
             return {
@@ -41,7 +42,7 @@ class AddMile extends Component {
             <div>
                 {this.state.addingMile ? 
                 <React.Fragment>
-                    <FormGroup onBlur={this.updateAddingMile}>
+                    <FormGroup onKeyUp={(e)=>{if(e.keyCode === 27)this.updateAddingMile()}}>
                     <Input type='number' name="milesTraveled" 
                         value={this.state.milesTraveled}
                         onChange={this.handleInputChange} autoFocus={true} />
